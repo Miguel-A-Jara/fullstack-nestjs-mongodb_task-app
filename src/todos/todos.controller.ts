@@ -1,6 +1,8 @@
-import { ParseMongoId } from './../common/pipes/parse-mongo-id.pipe';
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+
+import { ParseMongoId } from './../common/pipes/parse-mongo-id.pipe';
 import { TodosService } from './todos.service';
+
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 

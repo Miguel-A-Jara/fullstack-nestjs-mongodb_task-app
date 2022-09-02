@@ -15,6 +15,9 @@ export class Todo {
 
   @Prop({ default: 1, type: 'number' })
   priority: number;
+
+  @Prop({ default: false })
+  completed: boolean;
 }
 
 export const TodoSchema = SchemaFactory.createForClass(Todo);

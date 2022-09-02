@@ -11,7 +11,8 @@ import {
 export class CreateTodoDto {
   @ApiProperty()
   @IsString({ message: 'The author must contain valid characters' })
-  @MinLength(3, { message: 'Title is too short!' })
+  @MinLength(3, { message: 'Author is too short! (3 characters)' })
+  @MaxLength(10, { message: 'Author is too long! (10 characters)' })
   author: string;
 
   @ApiProperty()

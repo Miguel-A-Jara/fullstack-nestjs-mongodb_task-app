@@ -32,19 +32,19 @@ export class TodosService {
     await this.validateExistingTitle(updateTodoDto.title);
 
     //If we get to this point, is safe to insert into the DataBase
-    return await this.todoModel.findOneAndUpdate({id: id}, {...updateTodoDto}, { returnDocument: 'after' });
+    return await this.todoModel.findOneAndUpdate({_id: id}, {...updateTodoDto}, { returnDocument: 'after' });
   }
 
   async remove(id: string) {
     const todo = await this.findOne(id);
 
     //If we get to this point, is safe to remove from the DataBase
-    await this.todoModel.findOneAndDelete({id: id});
+    await this.todoModel.findOneAndDelete({_id: id});
     return `'${todo.title}' by ${todo.author} deleted successfully! (ID: ${todo.id})`;
   }
 
   async validateExistingTitle(title: string) {
     const todo = await this.todoModel.findOne({ title: title });
-    if( todo ) throw new NotFoundException(`Todo with title '${todo.title}' already exists.`);
+    if( todo ) throw new BadRequestException(`Title: '${todo.title}' already exists.`);
   }
 }
