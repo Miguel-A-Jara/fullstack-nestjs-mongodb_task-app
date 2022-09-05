@@ -15,9 +15,9 @@ async function bootstrap() {
   app.enableCors();
 
   /* Validations */
-  app.useGlobalPipes(
-    new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }),
-  );
+  // app.useGlobalPipes(
+  //   new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }),
+  // );
 
   /* Swagger */
   const config = new DocumentBuilder()
