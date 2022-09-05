@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, StreamableFile, Response } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, StreamableFile, Response, Req } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 
 import { ParseMongoId } from './../common/pipes/parse-mongo-id.pipe';
@@ -23,18 +23,6 @@ export class TodosController {
     return this.todosService.findAll();
   }
 
-  @Get('image/:param')
-  getImage(@Param('param') param: string, @Response({ passthrough: true }) res) {
-
-    res.set({
-      'Content-Type': 'image/jpeg',
-    });
-
-    const image = createReadStream(join(process.cwd(), 'upload', param));
-
-    return new StreamableFile(image);
-  }
-
   @Get(':id')
   findOne(@Param('id', ParseMongoId) id: string) {
     return this.todosService.findOne(id);
@@ -50,9 +38,22 @@ export class TodosController {
     return this.todosService.remove(id);
   }
 
+  @Get('image/:param')
+  getImage(@Param('param') param: string, @Response({ passthrough: true }) res) {
+
+    res.set({
+      'Content-Type': 'image/jpeg',
+    });
+
+    const image = createReadStream(join(process.cwd(), 'upload', param));
+
+    return new StreamableFile(image);
+  }
+
   @Post('image')
   @UseInterceptors(FileInterceptor('file', { dest: './upload' }))
-  uploadImage(@UploadedFile() file: Express.Multer.File){
-    return file.filename;
+  uploadImage(@Req() request: any, @UploadedFile() file: Express.Multer.File){
+    // return file.filename;
+    console.log(file)
   }
 }
