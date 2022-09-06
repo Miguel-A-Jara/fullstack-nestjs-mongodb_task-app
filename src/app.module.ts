@@ -1,6 +1,11 @@
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { MulterModule } from '@nestjs/platform-express';
+
+import { extname } from 'path';
+import { diskStorage } from 'multer';
+
 import { TodosModule } from './todos/todos.module';
 
 @Module({

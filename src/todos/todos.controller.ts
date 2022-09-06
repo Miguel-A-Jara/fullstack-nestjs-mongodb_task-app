@@ -7,7 +7,8 @@ import { TodosService } from './todos.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { createReadStream } from 'fs';
-import { join } from 'path';
+import { extname, join } from 'path';
+import { diskStorage } from 'multer';
 
 @Controller('todos')
 export class TodosController {
@@ -51,9 +52,16 @@ export class TodosController {
   }
 
   @Post('image')
-  @UseInterceptors(FileInterceptor('file', { dest: './upload' }))
-  uploadImage(@Req() request: any, @UploadedFile() file: Express.Multer.File){
-    // return file.filename;
-    console.log(file)
+  @UseInterceptors(FileInterceptor('file', { storage: diskStorage({
+    destination: (req, file, cb) => (
+      cb(null, './upload')
+    ),
+    filename(req, file, callback) {
+      const name = req.body.id;
+      return callback(null, `${name}`);
+    },
+  }) }))
+  uploadImage(@UploadedFile() file: Express.Multer.File, @Body() body){
+    return { name: file.filename };
   }
 }
