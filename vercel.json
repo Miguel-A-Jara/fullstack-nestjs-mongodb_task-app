@@ -1,8 +1,8 @@
 {
   "version": 2,
   "env": {
-    "MONGO_URI": "@task_api_mongo_uri",
-    "PORT": "@task_api_port"
+    "PORT": "@task_api_port",
+    "MONGODB": "@task_api_mongo_uri"
   },
   "builds": [
     {
