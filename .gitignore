@@ -2,6 +2,9 @@
 /dist
 /node_modules
 
+# This folder contains the uploaded images
+/upload 
+
 # Logs
 logs
 *.log
