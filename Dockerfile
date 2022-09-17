@@ -3,7 +3,7 @@ ARG MONGODB
 
 FROM node:16-alpine
 
-WORKDIR /dockered-nest-app
+WORKDIR /root/dockered-nest-app
 
 COPY package*.json .
 
