@@ -1,8 +1,6 @@
 # compiled output
 /node_modules
 
-# This folder contains the uploaded images
-/upload/*
 .env
 
 # Logs
