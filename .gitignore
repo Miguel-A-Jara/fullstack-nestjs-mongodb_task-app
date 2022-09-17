@@ -2,7 +2,7 @@
 /node_modules
 
 # This folder contains the uploaded images
-/upload 
+/upload/*
 .env
 
 # Logs
