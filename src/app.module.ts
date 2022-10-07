@@ -1,12 +1,10 @@
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { MulterModule } from '@nestjs/platform-express';
-
-import { extname } from 'path';
-import { diskStorage } from 'multer';
 
 import { TodosModule } from './todos/todos.module';
+
+console.log("\n\n\n\n\n MONGODB:",process.env.MONGODB,"\n\n\n\n\n\n")
 
 @Module({
   imports: [
@@ -17,4 +15,6 @@ import { TodosModule } from './todos/todos.module';
   controllers: [],
   providers: [],
 })
+
+
 export class AppModule {}
