@@ -14,7 +14,7 @@ services:
     build: ./
     container_name: nest_todo_c
     ports:
-      - '${PORT}:${PORT}'
+      - '${PORT}:3500'
     depends_on:
       - database
     environment:
