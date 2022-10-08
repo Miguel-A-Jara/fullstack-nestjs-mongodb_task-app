@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  database:
+    image: mongo:6.0.2
+    ports:
+      - '27017:27017'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME:root
+      - MONGO_INITDB_ROOT_PASSWORD:example
+    volumes:
+      - ./datase:/uploads
+  nestserver: 
+    build: ./
+    container_name: nest_todo_c
+    ports:
+      - '3500:3500'
+    depends_on:
+      - database
+    environment:
+      - MONGODB=${MONGODB}
+volumes:
+  database:
