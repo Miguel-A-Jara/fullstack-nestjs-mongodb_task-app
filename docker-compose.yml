@@ -5,19 +5,20 @@ services:
     image: mongo:6.0.2
     ports:
       - '27017:27017'
+    container_name: database
     environment:
-      - MONGO_INITDB_ROOT_USERNAME:root
-      - MONGO_INITDB_ROOT_PASSWORD:example
+      MONGODB_DATABASE: todo-mongodb
     volumes:
-      - ./datase:/uploads
+      - ./datase:/data/db
   nestserver: 
     build: ./
     container_name: nest_todo_c
     ports:
-      - '3500:3500'
+      - '${PORT}:${PORT}'
     depends_on:
       - database
     environment:
-      - MONGODB=${MONGODB}
+      - MONGO_URL=${MONGO_URL}
+      - PORT=${PORT}
 volumes:
   database:
