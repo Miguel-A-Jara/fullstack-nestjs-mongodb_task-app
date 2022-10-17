@@ -45,7 +45,7 @@ export declare class TodosController {
     }>;
     remove(id: string): Promise<string>;
     getImage(param: string, res: any): StreamableFile;
-    uploadImage(file: Express.Multer.File): {
+    uploadImage(file: Express.Multer.File, body: any): {
         name: string;
     };
 }

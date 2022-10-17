@@ -7,22 +7,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
-const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
+const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const todos_module_1 = require("./todos/todos.module");
+const users_module_1 = require("./users/users.module");
+console.log("\n\n\n\n\n MONGODB:", process.env.MONGO_URL, "\n\n\n\n\n\n");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             config_1.ConfigModule.forRoot({ isGlobal: true }),
-            mongoose_1.MongooseModule.forRoot(process.env.MONGODB),
+            mongoose_1.MongooseModule.forRoot(process.env.MONGO_URL),
             todos_module_1.TodosModule,
+            users_module_1.UsersModule,
         ],
         controllers: [],
         providers: [],
     })
 ], AppModule);
 exports.AppModule = AppModule;
+console.log("\n\n\n\n\n MONGODB:", process.env.MONGO_URL, "\n\n\n\n\n\n");
 //# sourceMappingURL=app.module.js.map

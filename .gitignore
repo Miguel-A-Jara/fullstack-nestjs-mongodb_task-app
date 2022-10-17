@@ -1,6 +1,9 @@
 # compiled output
 /node_modules
 upload
+database/
+datase
+dist
 .env
 
 # Logs

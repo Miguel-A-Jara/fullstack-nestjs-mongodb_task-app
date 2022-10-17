@@ -48,7 +48,7 @@ let TodosController = class TodosController {
         const image = (0, fs_1.createReadStream)((0, path_1.join)(process.cwd(), 'upload', param));
         return new common_1.StreamableFile(image);
     }
-    uploadImage(file) {
+    uploadImage(file, body) {
         return { name: file.filename };
     }
 };
@@ -98,14 +98,16 @@ __decorate([
 __decorate([
     (0, common_1.Post)('image'),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file', { storage: (0, multer_1.diskStorage)({
-            destination: './upload',
+            destination: (req, file, cb) => (cb(null, './upload')),
             filename(req, file, callback) {
-                return callback(null, `${req.body.id}`);
+                const name = req.body.id;
+                return callback(null, `${name}`);
             },
         }) })),
     __param(0, (0, common_1.UploadedFile)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], TodosController.prototype, "uploadImage", null);
 TodosController = __decorate([

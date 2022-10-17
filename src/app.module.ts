@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { TodosModule } from './todos/todos.module';
+import { UsersModule } from './users/users.module';
 
 console.log("\n\n\n\n\n MONGODB:",process.env.MONGO_URL,"\n\n\n\n\n\n")
 
@@ -11,6 +12,7 @@ console.log("\n\n\n\n\n MONGODB:",process.env.MONGO_URL,"\n\n\n\n\n\n")
     ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRoot(process.env.MONGO_URL),
     TodosModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [],
@@ -18,3 +20,4 @@ console.log("\n\n\n\n\n MONGODB:",process.env.MONGO_URL,"\n\n\n\n\n\n")
 
 
 export class AppModule {}
+console.log("\n\n\n\n\n MONGODB:",process.env.MONGO_URL,"\n\n\n\n\n\n")
