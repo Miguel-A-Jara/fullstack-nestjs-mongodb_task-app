@@ -29,10 +29,10 @@ import { Todo, TodoDocument } from './schema/todos.schema';
 export declare class TodosService {
     private todoModel;
     constructor(todoModel: Model<TodoDocument>);
-    create(createTodoDto: CreateTodoDto): Promise<import("mongoose").Document<unknown, any, TodoDocument> & Todo & Document & {
+    create(createTodoDto: CreateTodoDto, user: string): Promise<import("mongoose").Document<unknown, any, TodoDocument> & Todo & Document & {
         _id: import("mongoose").Types.ObjectId;
     }>;
-    findAll(): Promise<(import("mongoose").Document<unknown, any, TodoDocument> & Todo & Document & {
+    findAll(user: string): Promise<(import("mongoose").Document<unknown, any, TodoDocument> & Todo & Document & {
         _id: import("mongoose").Types.ObjectId;
     })[]>;
     findOne(id: string): Promise<import("mongoose").Document<unknown, any, TodoDocument> & Todo & Document & {

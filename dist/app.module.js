@@ -12,8 +12,14 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const todos_module_1 = require("./todos/todos.module");
 const users_module_1 = require("./users/users.module");
+const auth_middleware_1 = require("./common/middlewares/auth.middleware");
 console.log("\n\n\n\n\n MONGODB:", process.env.MONGO_URL, "\n\n\n\n\n\n");
 let AppModule = class AppModule {
+    configure(consumer) {
+        consumer
+            .apply(auth_middleware_1.AuthMiddleware)
+            .forRoutes('todos');
+    }
 };
 AppModule = __decorate([
     (0, common_1.Module)({
@@ -28,5 +34,6 @@ AppModule = __decorate([
     })
 ], AppModule);
 exports.AppModule = AppModule;
+;
 console.log("\n\n\n\n\n MONGODB:", process.env.MONGO_URL, "\n\n\n\n\n\n");
 //# sourceMappingURL=app.module.js.map

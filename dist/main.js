@@ -10,6 +10,10 @@ async function bootstrap() {
     const configService = app.get(config_1.ConfigService);
     const port = configService.get('PORT');
     app.enableCors();
+    app.use((req, res, next) => {
+        req.user = 'fdjfdhfj';
+        next();
+    });
     app.useGlobalPipes(new common_1.ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }));
     const config = new swagger_1.DocumentBuilder()
         .setTitle('TodosApp - NestJS | MongoDB')

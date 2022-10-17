@@ -13,8 +13,8 @@ export class UsersService {
 
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>){}
 
-  private createToken(id: string) {
-    return jwt.sign({id}, process.env.SECRET, { expiresIn: '3d' });
+  private createToken(username: string) {
+    return jwt.sign({username}, process.env.SECRET, { expiresIn: '3d' });
   }
 
   async signUpUser(createUserDto: CreateUserDto) {
@@ -30,7 +30,7 @@ export class UsersService {
     const hash = await bcrypt.hash(password, salt);    
 
     const createdUser = await this.userModel.create({ ...createUserDto, password: hash });
-    const token = this.createToken(createdUser.id);
+    const token = this.createToken(createdUser.username);
 
     return { createdUser, token };
   }
@@ -39,12 +39,14 @@ export class UsersService {
 
     const { email, password } = loginUserDto;
 
-    const user = await this.userModel.findOne({ $and: [ { email }, { password } ] });
-
-    if (!user) 
+    const user = await this.userModel.findOne({ email });
+    
+    const isValid = await bcrypt.compare(password, user.password);
+    
+    if (!user || !isValid) 
       throw new BadRequestException('Account not found');
 
-    const token = this.createToken(user._id.toString());
+    const token = this.createToken(user.username);
     
     return { user, token };
   }

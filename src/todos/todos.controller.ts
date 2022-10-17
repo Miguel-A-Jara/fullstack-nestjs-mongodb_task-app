@@ -7,7 +7,7 @@ import { TodosService } from './todos.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { createReadStream } from 'fs';
-import { extname, join } from 'path';
+import { join } from 'path';
 import { diskStorage } from 'multer';
 
 @Controller('todos')
@@ -15,13 +15,13 @@ export class TodosController {
   constructor(private readonly todosService: TodosService) {}
 
   @Post()
-  create(@Body() createTodoDto: CreateTodoDto) {
-    return this.todosService.create(createTodoDto);
+  create(@Body() createTodoDto: CreateTodoDto, @Req() request: Request & { user: string }) {
+    return this.todosService.create(createTodoDto, request.user);
   }
 
   @Get()
-  findAll() {
-    return this.todosService.findAll();
+  findAll(@Req() request: Request & { user: string }) {
+    return this.todosService.findAll(request.user);
   }
 
   @Get(':id')

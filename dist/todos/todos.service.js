@@ -21,12 +21,12 @@ let TodosService = class TodosService {
     constructor(todoModel) {
         this.todoModel = todoModel;
     }
-    async create(createTodoDto) {
+    async create(createTodoDto, user) {
         await this.validateExistingTitle(createTodoDto.title);
-        return await this.todoModel.create(createTodoDto);
+        return await this.todoModel.create(Object.assign(Object.assign({}, createTodoDto), { author: user }));
     }
-    async findAll() {
-        return await this.todoModel.find({}, { "__v": 0 });
+    async findAll(user) {
+        return await this.todoModel.find({ username: user }, { "__v": 0 });
     }
     async findOne(id) {
         const foundTodo = await this.todoModel.findById(id, { "__v": 0 });

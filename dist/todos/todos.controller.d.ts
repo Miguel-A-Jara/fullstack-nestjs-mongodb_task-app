@@ -31,10 +31,14 @@ import { UpdateTodoDto } from './dto/update-todo.dto';
 export declare class TodosController {
     private readonly todosService;
     constructor(todosService: TodosService);
-    create(createTodoDto: CreateTodoDto): Promise<import("mongoose").Document<unknown, any, import("./schema/todos.schema").TodoDocument> & import("./schema/todos.schema").Todo & Document & {
+    create(createTodoDto: CreateTodoDto, request: Request & {
+        user: string;
+    }): Promise<import("mongoose").Document<unknown, any, import("./schema/todos.schema").TodoDocument> & import("./schema/todos.schema").Todo & Document & {
         _id: import("mongoose").Types.ObjectId;
     }>;
-    findAll(): Promise<(import("mongoose").Document<unknown, any, import("./schema/todos.schema").TodoDocument> & import("./schema/todos.schema").Todo & Document & {
+    findAll(request: Request & {
+        user: string;
+    }): Promise<(import("mongoose").Document<unknown, any, import("./schema/todos.schema").TodoDocument> & import("./schema/todos.schema").Todo & Document & {
         _id: import("mongoose").Types.ObjectId;
     })[]>;
     findOne(id: string): Promise<import("mongoose").Document<unknown, any, import("./schema/todos.schema").TodoDocument> & import("./schema/todos.schema").Todo & Document & {

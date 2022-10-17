@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { AuthMiddleware } from './common/middlewares/auth.middleware';
 
 async function bootstrap() {
 
@@ -13,6 +14,11 @@ async function bootstrap() {
   const port = configService.get('PORT');
 
   app.enableCors();
+
+  app.use((req, res, next) => {
+    req.user = 'fdjfdhfj';
+    next();
+  })
 
   /* Validations */
   app.useGlobalPipes(

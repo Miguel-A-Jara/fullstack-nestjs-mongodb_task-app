@@ -9,13 +9,13 @@ import { Todo, TodoDocument } from './schema/todos.schema';
 export class TodosService {
   constructor(@InjectModel(Todo.name) private todoModel: Model<TodoDocument>) {}
 
-  async create(createTodoDto: CreateTodoDto) {
+  async create(createTodoDto: CreateTodoDto, user: string) {
     await this.validateExistingTitle(createTodoDto.title);
-    return await this.todoModel.create(createTodoDto);
+    return await this.todoModel.create({ ...createTodoDto, author: user });
   }
 
-  async findAll() {
-    return await this.todoModel.find({}, { "__v": 0 });
+  async findAll(user: string) {
+    return await this.todoModel.find({ username: user }, { "__v": 0 });
   }
 
   async findOne(id: string) {

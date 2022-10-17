@@ -26,11 +26,11 @@ let TodosController = class TodosController {
     constructor(todosService) {
         this.todosService = todosService;
     }
-    create(createTodoDto) {
-        return this.todosService.create(createTodoDto);
+    create(createTodoDto, request) {
+        return this.todosService.create(createTodoDto, request.user);
     }
-    findAll() {
-        return this.todosService.findAll();
+    findAll(request) {
+        return this.todosService.findAll(request.user);
     }
     findOne(id) {
         return this.todosService.findOne(id);
@@ -55,14 +55,16 @@ let TodosController = class TodosController {
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_todo_dto_1.CreateTodoDto]),
+    __metadata("design:paramtypes", [create_todo_dto_1.CreateTodoDto, Object]),
     __metadata("design:returntype", void 0)
 ], TodosController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+    __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], TodosController.prototype, "findAll", null);
 __decorate([
