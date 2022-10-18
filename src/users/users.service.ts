@@ -24,7 +24,7 @@ export class UsersService {
     const user = await this.userModel.findOne({ $or: [ { username }, { email } ] });
 
     if ( user )
-      throw new BadRequestException('User already exists');
+      throw new BadRequestException(`The user ${username} or email ${email} is already registered`);
 
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);    
@@ -32,7 +32,7 @@ export class UsersService {
     const createdUser = await this.userModel.create({ ...createUserDto, password: hash });
     const token = this.createToken(createdUser.username);
 
-    return { createdUser, token };
+    return { user: createdUser, token };
   }
 
   async logInUser(loginUserDto: LoginUserDto) {
@@ -41,9 +41,12 @@ export class UsersService {
 
     const user = await this.userModel.findOne({ email });
     
+    if (!user)
+      throw new BadRequestException('Account not found');
+
     const isValid = await bcrypt.compare(password, user.password);
     
-    if (!user || !isValid) 
+    if (!isValid) 
       throw new BadRequestException('Account not found');
 
     const token = this.createToken(user.username);

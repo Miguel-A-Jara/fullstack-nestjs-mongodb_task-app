@@ -26,7 +26,7 @@ let TodosService = class TodosService {
         return await this.todoModel.create(Object.assign(Object.assign({}, createTodoDto), { author: user }));
     }
     async findAll(user) {
-        return await this.todoModel.find({ username: user }, { "__v": 0 });
+        return await this.todoModel.find({ author: user }, { "__v": 0 });
     }
     async findOne(id) {
         const foundTodo = await this.todoModel.findById(id, { "__v": 0 });
@@ -44,7 +44,7 @@ let TodosService = class TodosService {
     async remove(id) {
         const todo = await this.findOne(id);
         await this.todoModel.findOneAndDelete({ _id: id });
-        return `'${todo.title}' by ${todo.author} deleted successfully! (ID: ${todo.id})`;
+        return `'${todo.title}' deleted successfully! (ID: ${todo.id})`;
     }
     async validateExistingTitle(title) {
         const todo = await this.todoModel.findOne({ title: title });

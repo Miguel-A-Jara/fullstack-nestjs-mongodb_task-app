@@ -15,7 +15,7 @@ export class TodosService {
   }
 
   async findAll(user: string) {
-    return await this.todoModel.find({ username: user }, { "__v": 0 });
+    return await this.todoModel.find({ author: user }, { "__v": 0 });
   }
 
   async findOne(id: string) {
@@ -40,7 +40,7 @@ export class TodosService {
 
     //If we get to this point, is safe to remove from the DataBase
     await this.todoModel.findOneAndDelete({_id: id});
-    return `'${todo.title}' by ${todo.author} deleted successfully! (ID: ${todo.id})`;
+    return `'${todo.title}' deleted successfully! (ID: ${todo.id})`;
   }
 
   async validateExistingTitle(title: string) {
