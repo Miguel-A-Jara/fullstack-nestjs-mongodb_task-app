@@ -8,7 +8,7 @@ This Task Manager Backend was made with Nest JS, using TypeScript.
 
 ## **List of Technologies used for the project:**
 
-- ### Frontend:
+### Frontend:
   - **Next JS**
   - **TypeScript**
   - **Bootstrap (V5)**
@@ -18,7 +18,7 @@ This Task Manager Backend was made with Nest JS, using TypeScript.
   - _**React Skeleton**_
   - _**React Tooltip**_
 
-- ### Backend: 
+### Backend: 
   - **Nest JS**
   - **Typescript**
   - **MongoDB**
